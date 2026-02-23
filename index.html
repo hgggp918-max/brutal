@@ -3,200 +3,236 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Brutal Network | BoxMining</title>
-    <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <title>Brutal Network | BoxMining Pro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Montserrat:wght@300;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         :root {
-            --main-blue: #0084ff;
-            --dark-blue: #050b18;
-            --card-blue: #0a162d;
-            --neon-glow: 0 0 15px rgba(0, 132, 255, 0.6);
+            --blue: #00d2ff;
+            --dark-blue: #060d1a;
+            --glass: rgba(10, 25, 47, 0.7);
         }
 
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            margin: 0;
-            padding: 0;
+            font-family: 'Montserrat', sans-serif;
             background-color: var(--dark-blue);
-            font-family: 'Poppins', sans-serif;
             color: white;
+            overflow-x: hidden;
+        }
+
+        /* Arka Plan Hareketli Efekt */
+        #bg-effect {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at center, #0a192f 0%, #060d1a 100%);
+        }
+
+        .hero {
+            height: 100vh;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            background-image: radial-gradient(circle at center, #0d2142 0%, #050b18 100%);
-        }
-
-        .container {
             text-align: center;
-            background: var(--card-blue);
-            padding: 50px;
-            border-radius: 30px;
-            border: 2px solid var(--main-blue);
-            box-shadow: var(--neon-glow);
-            width: 90%;
-            max-width: 550px;
+            padding: 20px;
         }
 
         h1 {
-            font-family: 'Black Ops One', cursive;
-            font-size: 3.5rem;
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(3rem, 10vw, 6rem);
             color: white;
-            text-transform: uppercase;
-            margin: 0;
-            text-shadow: var(--neon-glow);
-            letter-spacing: 3px;
+            text-shadow: 0 0 20px var(--blue);
+            margin-bottom: 10px;
         }
 
-        .gamemode {
-            background: var(--main-blue);
-            color: white;
-            padding: 5px 20px;
-            border-radius: 50px;
-            font-weight: bold;
-            font-size: 0.9rem;
-            display: inline-block;
-            margin-bottom: 25px;
+        .box-tag {
+            background: var(--blue);
+            color: black;
+            padding: 5px 25px;
+            font-weight: 900;
+            border-radius: 4px;
+            letter-spacing: 2px;
+            margin-bottom: 40px;
         }
 
-        .server-box {
-            background: rgba(0, 0, 0, 0.3);
-            padding: 20px;
-            border-radius: 15px;
-            margin: 25px 0;
-            border-left: 5px solid var(--main-blue);
+        /* IP Kutusu */
+        .ip-card {
+            background: var(--glass);
+            padding: 30px;
+            border: 1px solid rgba(0, 210, 255, 0.3);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            cursor: pointer;
+            transition: 0.4s;
+            max-width: 450px;
+            width: 100%;
         }
 
-        .ip-label {
-            font-size: 0.8rem;
-            color: #aaa;
-            text-transform: uppercase;
+        .ip-card:hover {
+            border-color: var(--blue);
+            box-shadow: 0 0 30px rgba(0, 210, 255, 0.2);
+            transform: translateY(-5px);
         }
 
         .ip-address {
-            font-size: 1.8rem;
+            font-size: 2rem;
+            color: var(--blue);
             font-weight: bold;
-            color: var(--main-blue);
             display: block;
-            margin: 10px 0;
-            cursor: pointer;
-            transition: 0.3s;
         }
 
-        .ip-address:hover {
-            transform: scale(1.05);
-            text-shadow: 0 0 10px var(--main-blue);
+        /* Progress Bar (Oyuncu Sayısı) */
+        .progress-container {
+            width: 100%;
+            height: 8px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            margin-top: 15px;
+            overflow: hidden;
+        }
+        .progress-bar {
+            height: 100%;
+            background: var(--blue);
+            width: 0%;
+            transition: width 1s ease-in-out;
+            box-shadow: 0 0 10px var(--blue);
         }
 
-        .stats {
-            display: flex;
-            justify-content: space-around;
-            margin-top: 20px;
+        /* Özellikler */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            width: 100%;
+            max-width: 1000px;
+            margin-top: 50px;
         }
 
-        .stat-item i {
-            color: var(--main-blue);
-            margin-bottom: 5px;
+        .feat-box {
+            background: rgba(255,255,255,0.03);
+            padding: 20px;
+            border-radius: 15px;
+            border-bottom: 3px solid var(--blue);
         }
 
-        .stat-val {
-            display: block;
-            font-size: 1.2rem;
-            font-weight: bold;
-        }
+        .feat-box i { font-size: 2rem; color: var(--blue); margin-bottom: 15px; }
 
-        .btn-discord {
-            display: block;
+        .btn-dc {
+            margin-top: 40px;
+            padding: 15px 40px;
             background: #5865F2;
             color: white;
             text-decoration: none;
-            padding: 15px;
-            border-radius: 12px;
+            border-radius: 50px;
             font-weight: bold;
-            font-size: 1.1rem;
-            margin-top: 30px;
             transition: 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        .btn-discord:hover {
-            background: #4752c4;
-            box-shadow: 0 5px 15px rgba(88, 101, 242, 0.4);
-        }
+        .btn-dc:hover { filter: brightness(1.2); transform: scale(1.05); }
 
-        #status-indicator {
-            height: 10px;
-            width: 10px;
-            border-radius: 50%;
-            display: inline-block;
-            margin-right: 5px;
-            background: #555;
+        /* Kopyalandı Bildirimi */
+        #copy-toast {
+            position: fixed;
+            bottom: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--blue);
+            color: black;
+            padding: 10px 30px;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: 0.5s;
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h1>BRUTAL</h1>
-    <div class="gamemode">BOXMINING</div>
+    <div id="bg-effect"></div>
 
-    <div class="server-box">
-        <span class="ip-label">Sunucu IP (Kopyalamak için tıkla)</span>
-        <span class="ip-address" id="ip" onclick="copyIP()">193.164.4.95</span>
-        
-        <div class="stats">
-            <div class="stat-item">
-                <i class="fas fa-signal"></i>
-                <span id="status-text" class="stat-val">Kontrol ediliyor...</span>
+    <section class="hero">
+        <h1>BRUTAL</h1>
+        <div class="box-tag">BOXMINING</div>
+
+        <div class="ip-card" onclick="copyIP()">
+            <span style="font-size: 0.8rem; opacity: 0.6;">SUNUCU ADRESI</span>
+            <span class="ip-address">193.164.4.95</span>
+            <div class="progress-container">
+                <div id="p-bar" class="progress-bar"></div>
             </div>
-            <div class="stat-item">
-                <i class="fas fa-users"></i>
-                <span id="player-count" class="stat-val">0 / 0</span>
+            <div style="margin-top: 10px; display: flex; justify-content: space-between; font-size: 0.9rem;">
+                <span id="status">Bağlanıyor...</span>
+                <span id="online-count">0/0</span>
             </div>
         </div>
-    </div>
 
-    <a href="https://discord.gg/vUCnx6t3Ex" class="btn-discord" target="_blank">
-        <i class="fab fa-discord"></i> DISCORD'A KATIL
-    </a>
-</div>
+        <div class="features">
+            <div class="feat-box">
+                <i class="fas fa-cube"></i>
+                <h3>Özel Editler</h3>
+                <p>Sadece Brutal'a özel kutu ve item sistemleri.</p>
+            </div>
+            <div class="feat-box">
+                <i class="fas fa-bolt"></i>
+                <h3>Sıfır Gecikme</h3>
+                <p>Yüksek performanslı makinelerde kesintisiz oyun.</p>
+            </div>
+            <div class="feat-box">
+                <i class="fas fa-shield-halved"></i>
+                <h3>Adaletli Oyun</h3>
+                <p>Hile koruması ve aktif yetkili kadrosu.</p>
+            </div>
+        </div>
 
-<script>
-    const serverIP = "193.164.4.95";
+        <a href="https://discord.gg/vUCrueh3Ex" class="btn-dc" target="_blank">
+            <i class="fab fa-discord"></i> DISCORD TOPLULUĞU
+        </a>
+    </section>
 
-    async function getStatus() {
-        try {
-            const response = await fetch(`https://api.mcsrvstat.us/2/${serverIP}`);
-            const data = await response.json();
-            
-            const playerSpan = document.getElementById('player-count');
-            const statusSpan = document.getElementById('status-text');
+    <div id="copy-toast">IP KOPYALANDI!</div>
 
-            if(data.online) {
-                statusSpan.innerHTML = '<span style="color:#2ecc71">AKTİF</span>';
-                playerSpan.innerText = `${data.players.online} / ${data.players.max}`;
-            } else {
-                statusSpan.innerHTML = '<span style="color:#e74c3c">KAPALI</span>';
-                playerSpan.innerText = "0 / 0";
-            }
-        } catch (e) {
-            console.log("Hata:", e);
+    <script>
+        const serverIP = "193.164.4.95";
+
+        async function updateAPI() {
+            try {
+                const res = await fetch(`https://api.mcsrvstat.us/2/${serverIP}`);
+                const data = await res.json();
+                
+                const pBar = document.getElementById('p-bar');
+                const status = document.getElementById('status');
+                const onlineCount = document.getElementById('online-count');
+
+                if(data.online) {
+                    status.innerHTML = "✅ SUNUCU AKTİF";
+                    status.style.color = "var(--blue)";
+                    onlineCount.innerText = `${data.players.online} / ${data.players.max}`;
+                    let percent = (data.players.online / data.players.max) * 100;
+                    pBar.style.width = percent + "%";
+                } else {
+                    status.innerHTML = "❌ SUNUCU KAPALI";
+                    status.style.color = "#ff4757";
+                    onlineCount.innerText = "0/0";
+                    pBar.style.width = "0%";
+                }
+            } catch (e) { console.log(e); }
         }
-    }
 
-    function copyIP() {
-        const el = document.createElement('textarea');
-        el.value = serverIP;
-        document.body.appendChild(el);
-        el.select();
-        document.execCommand('copy');
-        document.body.removeChild(el);
-        alert("IP Adresi Kopyalandı!");
-    }
+        function copyIP() {
+            navigator.clipboard.writeText(serverIP);
+            const toast = document.getElementById('copy-toast');
+            toast.style.bottom = "30px";
+            setTimeout(() => { toast.style.bottom = "-50px"; }, 2000);
+        }
 
-    getStatus();
-    setInterval(getStatus, 30000); // 30 saniyede bir günceller
-</script>
+        updateAPI();
+        setInterval(updateAPI, 30000);
+    </script>
 
 </body>
 </html>
